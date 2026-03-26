@@ -1,18 +1,46 @@
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { FormularioEnvio } from '../utils/formularioEnvio'
+
+type FormData = {
+  name: string
+  apellido: string
+  email: string
+  course: string
+  message: string
+}
 
 export default function LeadForm() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', course: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
 
-  const change = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
-    setForm(p => ({ ...p, [e.target.name]: e.target.value }))
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ mode: 'onTouched' })
 
-  const submit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true) }
+  const [sending, setSending] = useState(false)
+  const [error, setError]     = useState<string | null>(null)
+
+  const onSubmit = async (data: FormData) => {
+    setSending(true)
+    setError(null)
+    try {
+      await FormularioEnvio(data)
+      setSubmitted(true)
+    } catch {
+      setError('Hubo un problema al enviar. Inténtalo de nuevo.')
+    } finally {
+      setSending(false)
+    }
+  }
 
   const inputCls = `w-full px-3.5 py-2.5 border-[1.5px] border-divider rounded-lg text-[0.92rem]
     font-[inherit] text-fp-dark bg-fp-primary placeholder:text-fp-muted/70
     focus:outline-none focus:border-accent focus:ring-3 focus:ring-accent/20 focus:bg-white
     transition-all duration-200`
+
+  const errorCls = 'text-[0.78rem] text-red-500 mt-1'
 
   return (
     <section id="formulario" aria-labelledby="form-title"
@@ -66,67 +94,113 @@ export default function LeadForm() {
               </p>
             </div>
           ) : (
-            <form onSubmit={submit} noValidate aria-label="Formulario de contacto"
+            <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Formulario de contacto"
               className="flex flex-col gap-5">
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Nombre */}
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="name" className="text-[0.85rem] font-semibold text-fp-dark">
                     Nombre completo <span className="text-accent-deep" aria-hidden="true">*</span>
                   </label>
-                  <input type="text" id="name" name="name" value={form.name} onChange={change}
-                    placeholder="Ana García López" required autoComplete="name" className={inputCls}/>
+                  <input
+                    type="text" id="name"
+                    placeholder="Ana Maria"
+                    autoComplete="given-name"
+                    className={`${inputCls} ${errors.name ? 'border-red-400' : ''}`}
+                    {...register('name', { required: 'El nombre es obligatorio' })}
+                  />
+                  {errors.name && <p className={errorCls} role="alert">{errors.name.message}</p>}
                 </div>
+
+                {/* Apellido */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="email" className="text-[0.85rem] font-semibold text-fp-dark">
-                    Correo electrónico <span className="text-accent-deep" aria-hidden="true">*</span>
+                  <label htmlFor="apellido" className="text-[0.85rem] font-semibold text-fp-dark">
+                    Apellido
                   </label>
-                  <input type="email" id="email" name="email" value={form.email} onChange={change}
-                    placeholder="ana@ejemplo.com" required autoComplete="email" className={inputCls}/>
+                  <input
+                    type="text" id="apellido"
+                    placeholder="García López"
+                    autoComplete="family-name"
+                    className={inputCls}
+                    {...register('apellido')}
+                  />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Email */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="phone" className="text-[0.85rem] font-semibold text-fp-dark">Teléfono</label>
-                  <input type="tel" id="phone" name="phone" value={form.phone} onChange={change}
-                    placeholder="+34 600 000 000" autoComplete="tel" className={inputCls}/>
+                  <label htmlFor="email" className="text-[0.85rem] font-semibold text-fp-dark">
+                    Correo electrónico <span className="text-accent-deep" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    type="email" id="email"
+                    placeholder="ana@ejemplo.com"
+                    autoComplete="email"
+                    className={`${inputCls} ${errors.email ? 'border-red-400' : ''}`}
+                    {...register('email', {
+                      required: 'El correo es obligatorio',
+                      pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Correo no válido' },
+                    })}
+                  />
+                  {errors.email && <p className={errorCls} role="alert">{errors.email.message}</p>}
                 </div>
+
+                {/* Ciclo */}
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="course" className="text-[0.85rem] font-semibold text-fp-dark">
                     Ciclo de interés <span className="text-accent-deep" aria-hidden="true">*</span>
                   </label>
-                  <select id="course" name="course" value={form.course} onChange={change} required
-                    className={`${inputCls} appearance-none cursor-pointer
+                  <select
+                    id="course"
+                    className={`${inputCls} ${errors.course ? 'border-red-400' : ''} appearance-none cursor-pointer
                       bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2393BFC7' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")]
-                      bg-no-repeat bg-[right_14px_center]`}>
+                      bg-no-repeat bg-[right_14px_center]`}
+                    {...register('course', { required: 'Selecciona un ciclo' })}
+                  >
                     <option value="">Selecciona un ciclo</option>
                     <option value="dam">DAM – Aplicaciones Multiplataforma</option>
                     <option value="smr">SMR – Sistemas y Redes</option>
                     <option value="fpb-info">FPB Administración e Informática</option>
                     <option value="otro">Otro / No lo sé aún</option>
                   </select>
+                  {errors.course && <p className={errorCls} role="alert">{errors.course.message}</p>}
                 </div>
               </div>
 
+              {/* Mensaje */}
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="message" className="text-[0.85rem] font-semibold text-fp-dark">
                   Mensaje (opcional)
                 </label>
-                <textarea id="message" name="message" value={form.message} onChange={change}
-                  placeholder="¿Tienes alguna pregunta o comentario?" rows={4}
-                  className={`${inputCls} resize-y`}/>
+                <textarea
+                  id="message"
+                  placeholder="¿Tienes alguna pregunta o comentario?"
+                  rows={4}
+                  className={`${inputCls} resize-y`}
+                  {...register('message')}
+                />
               </div>
 
-              <button type="submit"
+              {error && (
+                <p className="text-[0.82rem] text-red-500 text-center -mb-1" role="alert">
+                  {error}
+                </p>
+              )}
+
+              <button type="submit" disabled={sending}
                 className="w-full inline-flex items-center justify-center gap-2 bg-accent text-white
                   font-semibold text-[1rem] py-3.5 rounded-lg border-2 border-accent
                   hover:bg-transparent hover:text-accent hover:-translate-y-0.5
-                  hover:shadow-[0_8px_24px_rgba(147,191,199,0.35)] transition-all duration-200">
-                Solicitar información gratuita
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                  <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                  hover:shadow-[0_8px_24px_rgba(147,191,199,0.35)] transition-all duration-200
+                  disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none">
+                {sending ? 'Enviando…' : 'Solicitar información gratuita'}
+                {!sending && (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
               </button>
 
               <p className="text-center text-[0.78rem] text-fp-muted">

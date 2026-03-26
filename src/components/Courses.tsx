@@ -16,8 +16,8 @@ const courses = [
   },
   {
     emoji: '📊', badge: 'FPB', badgeStyle: 'bg-divider text-fp-dark',
-    title: 'Informática y Comunicaciones', short: 'FPB Informática',
-    duration: '2 años · Básico',
+    title: 'Informatica de oficina', short: 'FPB Informática',
+    duration: '2 años · 2.000 horas',
     desc: 'La base perfecta para iniciarte en el mundo digital. Aprende ofimática, mantenimiento de equipos y redes.',
     tags: ['Office', 'Hardware', 'Internet', 'Seguridad'],
   }

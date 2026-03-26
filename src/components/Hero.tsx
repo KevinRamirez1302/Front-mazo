@@ -1,3 +1,7 @@
+import  headerimg  from "../assets/headerimg.svg";
+import maletin from "../assets/maletin.png";
+import codigo from "../assets/codigo.png";
+
 export default function Hero() {
   return (
     <section
@@ -84,48 +88,36 @@ export default function Hero() {
 
         {/* ── Visual ── */}
         <div className="relative flex items-center justify-center order-first md:order-last">
-          {/* Floating card 1 */}
-          <div className="absolute top-[10%] -left-5 z-10 flex items-center gap-2.5
-            bg-white/90 backdrop-blur-md border border-divider/60 rounded-2xl px-4 py-3
-            shadow-[0_4px_24px_rgba(60,120,80,0.10)] animate-float-card">
-            <div className="w-10 h-10 flex items-center justify-center bg-fp-secondary rounded-xl text-xl">🎓</div>
-            <div className="flex flex-col gap-0.5">
-              <strong className="text-[0.85rem] font-bold text-fp-dark">DAM</strong>
-              <span className="text-[0.72rem] text-fp-muted">Desarrollo de Apps Multiplataforma</span>
+          {/* Illustration — aspect 6:5 matches the SVG viewBox */}
+          <div className="relative w-full max-w-[520px] aspect-6/5 animate-float">
+            <img src={headerimg} alt="" className="w-full h-full object-contain" />
+
+            {/* Floating card 1 — top-left over the image */}
+            <div className="absolute top-[8%] left-0 z-10 flex items-center gap-2.5
+              bg-white/90 backdrop-blur-md border border-divider/60 rounded-2xl px-4 py-3
+              shadow-[0_4px_24px_rgba(60,120,80,0.10)] animate-float-card">
+              <div className="w-9 h-9 flex items-center justify-center bg-fp-secondary rounded-xl text-lg"><img src={codigo} alt="Codigo" className=" w-7" /></div>
+              <div className="flex flex-col gap-0.5">
+                <strong className="text-[0.82rem] font-bold text-fp-dark">DAM</strong>
+                <span className="text-[0.70rem] text-fp-muted">Desarrollo de Apps Multiplataforma</span>
+              </div>
             </div>
-          </div>
 
-          {/* Illustration */}
-          <div className="w-full max-w-[420px] animate-float">
-            <svg viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="210" cy="210" r="200" fill="#CBF3BB" opacity="0.6"/>
-              <circle cx="210" cy="210" r="150" fill="#ABE7B2" opacity="0.4"/>
-              <rect x="120" y="140" width="180" height="130" rx="16" fill="#93BFC7" opacity="0.85"/>
-              <rect x="130" y="155" width="160" height="90" rx="10" fill="white" opacity="0.9"/>
-              <rect x="142" y="168" width="80"  height="7" rx="3.5" fill="#ABE7B2"/>
-              <rect x="142" y="182" width="110" height="7" rx="3.5" fill="#CBF3BB"/>
-              <rect x="142" y="196" width="65"  height="7" rx="3.5" fill="#93BFC7" opacity="0.6"/>
-              <rect x="142" y="210" width="95"  height="7" rx="3.5" fill="#ABE7B2"/>
-              <rect x="142" y="224" width="50"  height="7" rx="3.5" fill="#CBF3BB"/>
-              <rect x="130" y="278" width="160" height="10" rx="5" fill="#93BFC7" opacity="0.4"/>
-              <rect x="145" y="265" width="130" height="10" rx="5" fill="#93BFC7" opacity="0.3"/>
-              <circle cx="225" cy="158" r="4" fill="#ECF4E8"/>
-              <circle cx="238" cy="158" r="4" fill="#ECF4E8"/>
-              <circle cx="251" cy="158" r="4" fill="#ECF4E8"/>
-            </svg>
-          </div>
-
-          {/* Floating card 2 */}
-          <div className="absolute bottom-[10%] -right-5 z-10 flex items-center gap-2.5
-            bg-white/90 backdrop-blur-md border border-divider/60 rounded-2xl px-4 py-3
-            shadow-[0_4px_24px_rgba(60,120,80,0.10)] animate-float-card-2">
-            <div className="w-10 h-10 flex items-center justify-center bg-fp-secondary rounded-xl text-xl">💼</div>
-            <div className="flex flex-col gap-0.5">
-              <strong className="text-[0.85rem] font-bold text-fp-dark">95% empleabilidad</strong>
-              <span className="text-[0.72rem] text-fp-muted">Salidas laborales reales</span>
+            {/* Floating card 2 — bottom-right over the image */}
+            <div className="absolute bottom-[8%] right-0 z-10 flex items-center gap-2.5
+              bg-white/90 backdrop-blur-md border border-divider/60 rounded-2xl px-4 py-3
+              shadow-[0_4px_24px_rgba(60,120,80,0.10)] animate-float-card-2">
+              <div className="w-9 h-9 flex items-center justify-center bg-fp-secondary rounded-xl text-lg"><img src={maletin} alt="Maletin" className=" w-6 " /></div>
+              <div className="flex flex-col gap-0.5">
+                <strong className="text-[0.82rem] font-bold text-fp-dark">95% empleabilidad</strong>
+                <span className="text-[0.70rem] text-fp-muted">Salidas laborales reales</span>
+              </div>
             </div>
           </div>
         </div>
+        
+
+        
 
       </div>
     </section>

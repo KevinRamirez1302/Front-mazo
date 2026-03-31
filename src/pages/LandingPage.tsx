@@ -12,8 +12,8 @@ export default function LandingPage() {
       <Benefits />
       <Courses />
       <PlaySection />
-      <LeadForm />
       <FAQ />
+      <LeadForm />
     </>
   )
 }

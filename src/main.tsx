@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import LandingPage from './pages/LandingPage.tsx'
 import PlayGemini from './components/PlayGemini.tsx'
+import CourseDetails from './pages/CourseDetails.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: 'play',
         element: <PlayGemini />,
+      },
+      {
+        path: 'curso/:id',
+        element: <CourseDetails />,
       },
     ],
   },

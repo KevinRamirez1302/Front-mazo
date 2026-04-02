@@ -59,7 +59,7 @@ export default function FloatingChatbot() {
     if (!text.trim()) return
 
     const newMessage: Message = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(),
       sender: 'user',
       text
     }

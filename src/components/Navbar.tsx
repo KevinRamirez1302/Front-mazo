@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import logo from '../assets/logomazo.png'
 
 const navLinks = [
@@ -45,14 +45,14 @@ export default function Navbar() {
       <div className="w-full max-w-[1200px] mx-auto px-6 flex items-center justify-between h-[72px] gap-8">
 
         {/* Logo */}
-        <button onClick={() => goTo('inicio')}
+        <Link to="/" onClick={() => window.scrollTo(0,0)}
           className="flex items-center gap-2.5 no-underline bg-transparent border-0 cursor-pointer shrink-0">
           <img src={logo} alt="Logo" className="w-12 h-12 rounded-full" />
           <span className="flex flex-col leading-tight">
-            <span className="text-[1.1rem] font-extrabold text-fp-dark tracking-wider">IES VILLAS DE MAZO</span>
+            <span className="text-[1.1rem] font-extrabold text-fp-dark tracking-wider">IES VILLA DE MAZO</span>
             <span className="text-[0.65rem] font-medium text-fp-muted tracking-widest uppercase">Centro de Formación Profesional</span>
           </span>
-        </button>
+        </Link>
 
         {/* Nav links — hidden on mobile */}
         <nav className="hidden md:flex items-center gap-1 flex-1 justify-center" aria-label="Navegación principal">
@@ -67,6 +67,14 @@ export default function Navbar() {
               {l.label}
             </button>
           ))}
+          <Link
+            to="/play"
+            className="text-[0.92rem] font-medium text-fp-body px-3.5 py-1.5 rounded-md
+              bg-transparent border-0 cursor-pointer
+              hover:text-accent-deep hover:bg-accent/10 transition-colors duration-200"
+          >
+            Play Gemeni
+          </Link>
         </nav>
 
         {/* CTA — hidden on mobile */}
@@ -117,6 +125,15 @@ export default function Navbar() {
               {l.label}
             </button>
           ))}
+          <Link
+            to="/play"
+            onClick={close}
+            className="text-[1rem] font-medium text-fp-body px-3 py-2.5 rounded-lg
+              bg-transparent border-0 cursor-pointer w-full text-left
+              hover:bg-accent/15 hover:text-accent-deep transition-colors duration-200"
+          >
+            Play Gemeni
+          </Link>
           <button
             onClick={() => goTo('formulario')}
             className="mt-2 inline-flex items-center justify-center gap-2 bg-accent text-white

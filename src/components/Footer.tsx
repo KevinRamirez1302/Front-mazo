@@ -61,7 +61,7 @@ export default function Footer() {
         <div className="flex flex-col gap-5">
           <a href="#inicio" className="flex items-center gap-2.5 no-underline">
             <img src={logo} alt="Logo" className="w-12 h-12 rounded-full" />
-            <span className="text-[1rem] font-bold text-fp-primary tracking-wide">IES VILLAS DE MAZO</span>
+            <span className="text-[1rem] font-bold text-fp-primary tracking-wide">IES VILLA DE MAZO</span>
           </a>
           <p className="text-[0.88rem] leading-[1.75] text-[#8aa5ab] max-w-[280px]">
             Formación profesional tecnológica de referencia. Preparamos a los

@@ -5,6 +5,8 @@ import App from './App.tsx'
 import LandingPage from './pages/LandingPage.tsx'
 import PlayGemini from './components/PlayGemini.tsx'
 import CourseDetails from './pages/CourseDetails.tsx'
+import AdminLogin from './pages/AdminLogin.tsx'
+import AdminDashboard from './pages/AdminDashboard.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: 'curso/:id',
         element: <CourseDetails />,
+      },
+      {
+        path: 'admin',
+        element: <AdminLogin />,
+      },
+      {
+        path: 'admin-panel',
+        element: <AdminDashboard />,
       },
     ],
   },

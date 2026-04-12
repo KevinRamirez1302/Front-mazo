@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import mazitoImg from '../assets/Mazito.png'
+import { preguntarChatbot } from '../api'
 
 const faqs = [
   {
@@ -55,41 +56,58 @@ export default function FloatingChatbot() {
     if (isOpen) scrollToBottom()
   }, [messages, isTyping, isOpen])
 
-  const handleSend = (text: string, isQuickReply: boolean = false) => {
+  const handleSend = async (text: string) => {
     if (!text.trim()) return
+
+    // Preparar el historial antes de añadir el nuevo mensaje del usuario
+    // El formato esperado por Gemini en el backend es: [{ role: 'user' | 'model', parts: [{ text: string }] }]
+    // IMPORTANTE: El historial de Gemini DEBE empezar siempre con un mensaje de 'user'.
+    const history = messages
+      .map(msg => ({
+        role: msg.sender === 'user' ? 'user' : 'model' as 'user' | 'model',
+        parts: [{ text: msg.text }]
+      }))
+      .filter((msg, index) => {
+        // Si el primer mensaje es del modelo (el saludo inicial), lo saltamos para cumplir la regla de Gemini
+        if (index === 0 && msg.role === 'model') return false;
+        return true;
+      });
 
     const newMessage: Message = {
       id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(),
       sender: 'user',
       text
     }
+    
     setMessages(prev => [...prev, newMessage])
     setInputValue('')
     setIsTyping(true)
 
-    let answerText = 'No tengo una respuesta exacta a esa pregunta. Te sugiero usar nuestro cuestionario para esa pregunta más personalizada o contactar directamente con el centro para más información.'
-
-    if (isQuickReply) {
-      const faq = faqs.find(f => f.q === text)
-      if (faq) answerText = faq.a
-    } else {
-      const bestMatch = faqs.find(f => {
-        const words = text.toLowerCase().split(/\s+/).filter(w => w.length > 3)
-        return words.some(w => f.q.toLowerCase().includes(w) || f.a.toLowerCase().includes(w))
-      })
-      if (bestMatch) {
-        answerText = bestMatch.a
-      }
-    }
-
-    setTimeout(() => {
-      setIsTyping(false)
+    try {
+      // Llamada real a la API del chatbot enviando el mensaje actual y el historial
+      const answerText = await preguntarChatbot(text, history);
+      
       setMessages(prev => [...prev, {
-        id: (Date.now() + 1).toString(),
+        id: crypto.randomUUID ? crypto.randomUUID() : (Date.now() + 1).toString(),
         sender: 'bot',
         text: answerText
       }])
-    }, 1500)
+    } catch (error: any) {
+      console.error("Chatbot Error:", error);
+      
+      const apiErrorMessage = error.response?.data?.message || error.response?.data || error.message;
+      const displayMessage = apiErrorMessage 
+        ? `Error de la API: ${apiErrorMessage}`
+        : 'Lo siento, tuve un problema conectándome a mi cerebro digital. Por favor, inténtalo de nuevo más tarde o revisa tu conexión.';
+
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        sender: 'bot',
+        text: displayMessage
+      }])
+    } finally {
+      setIsTyping(false)
+    }
   }
 
   return (
@@ -177,7 +195,7 @@ export default function FloatingChatbot() {
               key={i}
               disabled={isTyping}
               className="text-[0.75rem] font-medium bg-white border border-[#98c7d1]/40 text-[#5a8f97] px-3 py-1.5 rounded-full hover:bg-[#98c7d1] hover:text-white hover:border-[#98c7d1] hover:-translate-y-0.5 transition-all duration-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-left leading-tight"
-              onClick={() => handleSend(faq.q, true)}
+              onClick={() => handleSend(faq.q)}
             >
               {faq.q}
             </button>

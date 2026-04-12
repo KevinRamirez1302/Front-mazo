@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
+import { login } from '../api';
 import logo from '../assets/logomazo.png';
 
 export default function AdminLogin() {
@@ -9,42 +11,30 @@ export default function AdminLogin() {
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
-  // TODO: Coloca aquí la URL real de tu API de Login
-  const API_LOGIN_URL = 'http://localhost:3000/usuarios/login';
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMsg('');
 
     try {
-      // ==== LÓGICA DE API (Descomentar cuando el backend esté listo) ====
-      
-      const response = await fetch(API_LOGIN_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const data = await login({ username, password });
 
-      if (!response.ok) {
-        throw new Error('Credenciales incorrectas o error en el servidor');
-      }
-
-      const data = await response.json();
-      
       if (data.access_token) {
         localStorage.setItem('adminToken', data.access_token);
-        // Opcional: podrías guardar los datos del usuario en localStorage también si es necesario
         localStorage.setItem('adminUser', JSON.stringify(data.user));
-        
+
         navigate('/admin-panel', { state: { user: data.user } });
       } else {
         throw new Error('No se recibió token de acceso del servidor');
       }
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Error al intentar iniciar sesión');
+    } catch (err: unknown) {
+      if (err instanceof AxiosError) {
+        setErrorMsg(err.response?.data?.message || 'Credenciales incorrectas o error en el servidor');
+      } else if (err instanceof Error) {
+        setErrorMsg(err.message);
+      } else {
+        setErrorMsg('Error al intentar iniciar sesión');
+      }
     } finally {
       setIsLoading(false);
     }

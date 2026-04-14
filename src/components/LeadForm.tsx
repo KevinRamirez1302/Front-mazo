@@ -10,6 +10,7 @@ type FormData = {
   dni?: string
   course: string
   message: string
+  privacyAccepted: boolean
 }
 
 export default function LeadForm() {
@@ -29,7 +30,8 @@ export default function LeadForm() {
     setError(null)
     try {
       console.log(data)
-      await FormularioEnvio(data)
+      const { privacyAccepted, ...payload } = data
+      await FormularioEnvio(payload as any)
       setSubmitted(true)
     } catch {
       setError('Hubo un problema al enviar. Inténtalo de nuevo.')
@@ -221,6 +223,24 @@ export default function LeadForm() {
                 />
               </div>
 
+              {/* Aceptación de Privacidad y Cookies */}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-start gap-3">
+                  <div className="relative flex items-center h-5">
+                    <input
+                      id="privacyAccepted"
+                      type="checkbox"
+                      className="w-4 h-4 rounded border-divider text-accent focus:ring-accent/30 cursor-pointer"
+                      {...register('privacyAccepted', { required: 'Debes aceptar la política de privacidad' })}
+                    />
+                  </div>
+                  <label htmlFor="privacyAccepted" className="text-[0.82rem] text-fp-muted leading-tight cursor-pointer">
+                    He leído y acepto la <a href="#privacidad" className="text-accent underline font-medium hover:text-accent-deep transition-colors">Política de Privacidad</a> y el uso de <a href="#cookies" className="text-accent underline font-medium hover:text-accent-deep transition-colors">Cookies</a>. <span className="text-accent-deep" aria-hidden="true">*</span>
+                  </label>
+                </div>
+                {errors.privacyAccepted && <p className={errorCls} role="alert">{errors.privacyAccepted.message}</p>}
+              </div>
+
               {error && (
                 <p className="text-[0.82rem] text-red-500 text-center -mb-1" role="alert">
                   {error}
@@ -242,9 +262,7 @@ export default function LeadForm() {
               </button>
 
               <p className="text-center text-[0.78rem] text-fp-muted">
-                Al enviar, aceptas nuestra{' '}
-                <a href="#privacidad" className="text-accent-deep underline">Política de Privacidad</a>.
-                Sin spam, nunca.
+                Tus datos están protegidos por la Ley de Protección de Datos, Tu privacidad es importante para nosotros.
               </p>
             </form>
           )}

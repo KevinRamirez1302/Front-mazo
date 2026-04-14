@@ -202,7 +202,10 @@ export default function LeadForm() {
                     placeholder="12345678A"
                     className={`${inputCls} ${errors.dni ? 'border-red-400' : ''}`}
                     {...register('dni', {
-                      pattern: { value: /^(|[XYZ]?\d{5,8}[A-Z])$/, message: 'DNI/NIE no válido' },
+                      pattern: { 
+                        value: /^(|\d{8}[A-Z]|[XYZ]\d{7}[A-Z])$/i, 
+                        message: 'DNI o NIE no válido' 
+                      },
                     })}
                   />
                   {errors.dni && <p className={errorCls} role="alert">{errors.dni.message}</p>}

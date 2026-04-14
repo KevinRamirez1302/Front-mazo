@@ -104,6 +104,8 @@ export default function AdminDashboard() {
                 <tr>
                   <th scope="col" className="px-6 py-4 font-semibold">Nombre Completo</th>
                   <th scope="col" className="px-6 py-4 font-semibold">Correo Electrónico</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">Teléfono</th>
+                  <th scope="col" className="px-6 py-4 font-semibold">DNI / NIE</th>
                   <th scope="col" className="px-6 py-4 font-semibold">Ciclo de Interés</th>
                   <th scope="col" className="px-6 py-4 font-semibold w-1/3">Mensaje</th>
                 </tr>
@@ -111,7 +113,7 @@ export default function AdminDashboard() {
               <tbody>
                 {isLoading ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center">
+                    <td colSpan={6} className="px-6 py-12 text-center">
                       <div className="flex justify-center items-center gap-2 text-gray-500">
                         <svg className="animate-spin h-5 w-5 text-fp-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -131,6 +133,12 @@ export default function AdminDashboard() {
                         {lead.email}
                       </td>
                       <td className="px-6 py-4">
+                        {lead.telefono || <span className="text-gray-400 italic">-</span>}
+                      </td>
+                      <td className="px-6 py-4">
+                        {lead.dni || <span className="text-gray-400 italic">-</span>}
+                      </td>
+                      <td className="px-6 py-4">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                           {lead.curso}
                         </span>
@@ -143,7 +151,7 @@ export default function AdminDashboard() {
                 )}
                 {!isLoading && leads.length === 0 && !error && (
                   <tr>
-                    <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
+                    <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
                       No hay solicitudes registradas aún.
                     </td>
                   </tr>

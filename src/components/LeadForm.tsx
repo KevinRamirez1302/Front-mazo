@@ -6,6 +6,8 @@ type FormData = {
   name: string
   apellido: string
   email: string
+  telefono?: string
+  dni?: string
   course: string
   message: string
 }
@@ -166,6 +168,41 @@ export default function LeadForm() {
                     <option value="otro">Otro / No lo sé aún</option>
                   </select>
                   {errors.course && <p className={errorCls} role="alert">{errors.course.message}</p>}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Teléfono */}
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="telefono" className="text-[0.85rem] font-semibold text-fp-dark">
+                    Teléfono (opcional)
+                  </label>
+                  <input
+                    type="tel" id="telefono"
+                    placeholder="600 000 000"
+                    autoComplete="tel"
+                    className={`${inputCls} ${errors.telefono ? 'border-red-400' : ''}`}
+                    {...register('telefono', {
+                      pattern: { value: /^(|[0-9+\-\s]{9,15})$/, message: 'Teléfono no válido' },
+                    })}
+                  />
+                  {errors.telefono && <p className={errorCls} role="alert">{errors.telefono.message}</p>}
+                </div>
+
+                {/* DNI */}
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="dni" className="text-[0.85rem] font-semibold text-fp-dark">
+                    DNI / NIE (opcional)
+                  </label>
+                  <input
+                    type="text" id="dni"
+                    placeholder="12345678A"
+                    className={`${inputCls} ${errors.dni ? 'border-red-400' : ''}`}
+                    {...register('dni', {
+                      pattern: { value: /^(|[XYZ]?\d{5,8}[A-Z])$/, message: 'DNI/NIE no válido' },
+                    })}
+                  />
+                  {errors.dni && <p className={errorCls} role="alert">{errors.dni.message}</p>}
                 </div>
               </div>
 

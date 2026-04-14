@@ -5,6 +5,8 @@ type FormPayload = {
     name: string
     apellido: string
     email: string
+    telefono?: string
+    dni?: string
     course: string
     message: string
 }
@@ -15,6 +17,8 @@ export const FormularioEnvio = async (form: FormPayload) => {
             nombre: form.name,
             apellido: form.apellido,
             email: form.email,
+            telefono: form.telefono,
+            dni: form.dni,
             curso: form.course,
             mensaje: form.message,
         };

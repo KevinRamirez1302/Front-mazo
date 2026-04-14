@@ -269,7 +269,7 @@ export default function AdminDashboard() {
                       labelStyle={{ color: '#374151', fontWeight: 'bold', marginBottom: '4px' }}
                     />
                     <Bar dataKey="count" radius={[4, 4, 0, 0]}>
-                      {stats.chartData.map((entry, index) => (
+                      {stats.chartData.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Bar>

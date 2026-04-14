@@ -14,7 +14,7 @@ export type PersonaPayload = {
  * Registra una nueva persona (formulario de contacto).
  */
 export const crearPersona = async (data: PersonaPayload) => {
-    const response = await axiosClient.post('/personas', data);
+    const response = await axiosClient.post('/personas/', data);
     return response.data;
 };
 
@@ -22,7 +22,7 @@ export const crearPersona = async (data: PersonaPayload) => {
  * Obtiene la lista de todas las personas registradas.
  */
 export const obtenerPersonas = async () => {
-    const response = await axiosClient.get('/personas');
+    const response = await axiosClient.get('/personas/');
     return response.data;
 };
 

@@ -28,6 +28,7 @@ export default function LeadForm() {
     setSending(true)
     setError(null)
     try {
+      console.log(data)
       await FormularioEnvio(data)
       setSubmitted(true)
     } catch {

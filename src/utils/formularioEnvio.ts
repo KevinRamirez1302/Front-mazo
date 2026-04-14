@@ -23,6 +23,7 @@ export const FormularioEnvio = async (form: FormPayload) => {
             mensaje: form.message,
         };
 
+        console.log('Enviando datos al API:', data);
         const result = await crearPersona(data);
         return result;
     } catch (error) {

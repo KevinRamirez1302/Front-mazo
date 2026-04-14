@@ -20,8 +20,7 @@ export default function Courses() {
             Elige tu ciclo formativo
           </h2>
           <p className="text-[1.05rem] text-fp-muted max-w-[560px] leading-[1.7] mx-auto">
-            Desde la base hasta la especialización. Tenemos el ciclo perfecto para donde
-            estés en tu carrera.
+            Desde la base hasta la especialización. Tenemos el ciclo perfecto para cualquier etapa de tu carrera.
           </p>
         </div>
 

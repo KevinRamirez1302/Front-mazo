@@ -15,16 +15,13 @@ const faqs = [
   },
   {
     q: '¿Puedo estudiar a distancia o hay modalidad semipresencial?',
-    a: 'Actualmente ofrecemos la modalidad presencial y la modalidad a distancia (online) para algunos ciclos. La modalidad semipresencial está en fase de implementación. Consúltanos sobre la disponibilidad de cada ciclo.',
+    a: 'Actualmente ofrecemos la modalidad presencial. Consúltanos sobre la disponibilidad de cada ciclo.',
   },
   {
-    q: '¿Qué pasa si trabajo? ¿Puedo compaginarlo con el ciclo?',
-    a: 'Ofrecemos grupos en horario de tarde/noche pensados especialmente para personas que trabajan. Además, si tienes experiencia laboral acreditada en el sector, puedes solicitar el reconocimiento de créditos.',
+    q: '¿Qué horario tienen los ciclos?',
+    a: 'Ofrecemos turnos de la mañana. ',
   },
-  {
-    q: '¿Cuánto cuesta la matrícula? ¿Hay becas disponibles?',
-    a: 'Los precios están fijados por la Consejería de Educación y son muy accesibles (desde 0€ con beca). Gestionamos las principales becas del MEC y de la comunidad autónoma. Solicita información personalizada para conocer tu caso.',
-  },
+
 ]
 
 export default function FAQ() {

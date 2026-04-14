@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom'
 import logo from '../assets/logomazo.png'
 
 const cols = {
   Ciclos: [
-    { label: 'DAM – Multiplataforma',    href: '#cursos' },
-    { label: 'SMR – Redes',              href: '#cursos' },
-    { label: 'FPB Administración e Informática',          href: '#cursos' },
+    { label: 'DAM – Multiplataforma', href: '#cursos' },
+    { label: 'SMR – Redes', href: '#cursos' },
+    { label: 'FPB Administración e Informática',href:'#cursos' },
   ],
   Centro: [
     { label: 'Sobre nosotros',           href: '#beneficios' },
@@ -69,7 +70,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-2.5">
             {socials.map(s => (
-              <a key={s.label} href="#" aria-label={s.label}
+              <a key={s.label} href="https://www.instagram.com/informatica_villa_mazo?igsh=ZWJ2aGJ6aDE4ZHU5" target="_blank" rel="noopener noreferrer" aria-label={s.label}
                 className="w-9 h-9 flex items-center justify-center text-accent
                   bg-accent/[0.12] border border-accent/20 rounded-lg
                   hover:bg-accent hover:text-white hover:border-accent
@@ -115,8 +116,8 @@ export default function Footer() {
               },
               {
                 icon: <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4.5A1.5 1.5 0 013.5 3h9A1.5 1.5 0 0114 4.5v7A1.5 1.5 0 0112.5 13h-9A1.5 1.5 0 012 11.5v-7zM2 5l6 4 6-4" stroke="#93BFC7" strokeWidth="1.2" strokeLinecap="round"/></svg>,
-                text: 'info@centromazo.es',
-                href: 'mailto:info@centromazo.es',
+                text: 'dptoinformatica.ies.villamazo@gmail.com',
+                href: 'mailto:dptoinformatica.ies.villamazo@gmail.com',
               },
               {
                 icon: <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3h2l1 3-1.5 1.5A10 10 0 009.5 11.5L11 10l3 1v2a1 1 0 01-1 1A12 12 0 012 4a1 1 0 011-1z" stroke="#93BFC7" strokeWidth="1.2" fill="none"/></svg>,
@@ -140,7 +141,7 @@ export default function Footer() {
         <div className="w-full max-w-[1200px] mx-auto px-6 py-4
           flex flex-col sm:flex-row justify-between items-center gap-2
           text-[0.8rem] text-[#5a8090]">
-          <p>© {new Date().getFullYear()} IES VILLAS DE MAZO. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} IES VILLA DE MAZO. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

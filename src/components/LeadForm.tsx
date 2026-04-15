@@ -238,7 +238,7 @@ export default function LeadForm() {
                     />
                   </div>
                   <label htmlFor="privacyAccepted" className="text-[0.82rem] text-fp-muted leading-tight cursor-pointer">
-                    He leído y acepto la <a href="#privacidad" className="text-accent underline font-medium hover:text-accent-deep transition-colors">Política de Privacidad</a> y el uso de <a href="#cookies" className="text-accent underline font-medium hover:text-accent-deep transition-colors">Cookies</a>. <span className="text-accent-deep" aria-hidden="true">*</span>
+                    He leído y acepto la <a href="/privacidad" className="text-accent underline font-medium hover:text-accent-deep transition-colors">Política de Privacidad</a> y el uso de <a href="#cookies" className="text-accent underline font-medium hover:text-accent-deep transition-colors">Cookies</a>. <span className="text-accent-deep" aria-hidden="true">*</span>
                   </label>
                 </div>
                 {errors.privacyAccepted && <p className={errorCls} role="alert">{errors.privacyAccepted.message}</p>}

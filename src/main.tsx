@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage.tsx'
 import PlayGemini from './components/PlayGemini.tsx'
 import CourseDetails from './pages/CourseDetails.tsx'
 import AdminLogin from './pages/AdminLogin.tsx'
+import Privacidad from './pages/Privacidad.tsx'
 import AdminDashboard from './pages/AdminDashboard.tsx'
 import ProtectedRoute from './components/ProtectedRoute.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'admin',
         element: <AdminLogin />,
+      },
+      {
+        path: 'privacidad',
+        element: <Privacidad />,
       },
       {
         path: 'admin-panel',

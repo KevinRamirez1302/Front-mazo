@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function SobreNosotros() {
-  // Desplaza al inicio al entrar en la página
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

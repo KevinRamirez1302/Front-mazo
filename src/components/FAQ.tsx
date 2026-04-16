@@ -10,8 +10,8 @@ const faqs = [
     a: 'El periodo de matriculación ordinario se abre cada año en junio/julio. Si las plazas están completas, te incluimos en lista de espera sin ningún coste. También gestionamos el proceso de admisión extraordinaria en septiembre.',
   },
   {
-    q: '¿Las prácticas en empresa (FCT) son obligatorias?',
-    a: 'Sí, la Formación en Centros de Trabajo (FCT) es una parte obligatoria e imprescindible de todos los ciclos. Tenemos convenio con más de 60 empresas del sector y nuestro departamento de orientación laboral te ayudará a encontrar la empresa ideal.',
+    q: '¿Las prácticas en empresa (DUAL) son obligatorias?',
+    a: 'Sí, la Formación en Centros de Trabajo (DUAL) es una parte obligatoria e imprescindible de todos los ciclos. Tenemos convenio con más de 60 empresas del sector y nuestro departamento de orientación laboral te ayudará a encontrar la empresa ideal.',
   },
   {
     q: '¿Puedo estudiar a distancia o hay modalidad semipresencial?',

@@ -2,33 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import mazitoImg from '../assets/Mazito.png'
 import { preguntarChatbot } from '../api'
 
-const faqs = [
-  {
-    q: 'Conocimientos previos',
-    a: 'Depende del ciclo. Para los ciclos de Grado Superior (DAM, DAW, CETI) necesitas el título de Bachillerato o un ciclo de Grado Medio. Para SMR, el Graduado en ESO. Para los FPB, simplemente haber cursado 2º de ESO o más, sin necesidad de haberlo superado.',
-  },
-  {
-    q: 'Inicio de curso y matrícula',
-    a: 'El periodo de matriculación ordinario se abre cada año en junio/julio. Si las plazas están completas, te incluimos en lista de espera sin ningún coste. También gestionamos el proceso de admisión extraordinaria en septiembre.',
-  },
-  {
-    q: 'Prácticas en empresa',
-    a: 'Sí, es una parte obligatoria e imprescindible de todos los ciclos. Tenemos convenio con más de 60 empresas del sector y nuestro departamento de orientación laboral te ayudará a encontrar la empresa ideal.',
-  },
-  {
-    q: 'Modalidad a distancia',
-    a: 'Actualmente ofrecemos la modalidad presencial y la modalidad a distancia (online) para algunos ciclos. La modalidad semipresencial está en fase de implementación. Consúltanos sobre la disponibilidad de cada ciclo.',
-  },
-  {
-    q: 'Compaginar con trabajo',
-    a: 'Ofrecemos grupos en horario de tarde/noche pensados especialmente para personas que trabajan. Además, si tienes experiencia laboral acreditada en el sector, puedes solicitar el reconocimiento de créditos.',
-  },
-  {
-    q: 'Precio y becas',
-    a: 'Los precios están fijados por la Consejería de Educación y son muy accesibles (desde 0€ con beca). Gestionamos las principales becas del MEC y de la comunidad autónoma. Solicita información personalizada para conocer tu caso.',
-  },
-]
-
 type Message = {
   id: string
   sender: 'bot' | 'user'
@@ -186,20 +159,6 @@ export default function FloatingChatbot() {
             </div>
           )}
           <div ref={messagesEndRef} />
-        </div>
-
-        {/* Quick Replies */}
-        <div className="bg-[#f4fafa] px-5 py-4 flex flex-wrap gap-2 border-t border-[#98c7d1]/10">
-          {faqs.map((faq, i) => (
-            <button
-              key={i}
-              disabled={isTyping}
-              className="text-[0.75rem] font-medium bg-white border border-[#98c7d1]/40 text-[#5a8f97] px-3 py-1.5 rounded-full hover:bg-[#98c7d1] hover:text-white hover:border-[#98c7d1] hover:-translate-y-0.5 transition-all duration-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-left leading-tight"
-              onClick={() => handleSend(faq.q)}
-            >
-              {faq.q}
-            </button>
-          ))}
         </div>
 
         {/* Input */}

@@ -2,22 +2,20 @@ import logo from '../assets/logomazo.png'
 
 const cols = {
   Ciclos: [
-    { label: 'DAM – Multiplataforma', href: '#cursos' },
-    { label: 'SMR – Redes', href: '#cursos' },
-    { label: 'FPB Administración e Informática',href:'#cursos' },
+    { label: 'DAM – Multiplataforma', href: '/curso/dam ' },
+    { label: 'SMR – Redes', href: '/curso/smr' },
+    { label: 'FPB Administración e Informática',href:'/curso/fpb' },
   ],
   Centro: [
-    { label: 'Sobre nosotros',           href: '#beneficios' },
+    { label: 'Sobre nosotros',           href: '/sobre-nosotros' },
     { label: 'Instalaciones',            href: '#' },
     { label: 'Equipo docente',           href: '#' },
-    { label: 'Empresas colaboradoras',   href: '#' },
-    { label: 'Prácticas FCT',           href: '#' },
+
   ],
   Legal: [
-    { label: 'Política de privacidad',   href: '#' },
-    { label: 'Aviso legal',             href: '#' },
+    { label: 'Política de privacidad',  href: '/privacidad', target: '_blank' },
+    { label: 'Aviso legal',             href: '/privacidad' },
     { label: 'Cookies',                 href: '#' },
-    { label: 'Accesibilidad',           href: '#' },
   ],
 }
 
@@ -88,9 +86,11 @@ export default function Footer() {
                 {group}
               </h3>
               <ul className="flex flex-col gap-2">
-                {links.map(l => (
+                {links.map((l: any) => (
                   <li key={l.label}>
                     <a href={l.href}
+                      target={l.target}
+                      rel={l.target === '_blank' ? 'noopener noreferrer' : undefined}
                       className="text-[0.875rem] text-[#8aa5ab] hover:text-fp-primary transition-colors duration-200">
                       {l.label}
                     </a>

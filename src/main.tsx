@@ -9,6 +9,7 @@ import AdminLogin from './pages/AdminLogin.tsx'
 import Privacidad from './pages/Privacidad.tsx'
 import AdminDashboard from './pages/AdminDashboard.tsx'
 import ProtectedRoute from './components/ProtectedRoute.tsx'
+import SobreNosotros from './pages/SobreNosotros.tsx'
 import { NotFound } from './components/NotFound.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'privacidad',
         element: <Privacidad />,
+      },
+      {
+        path: 'sobre-nosotros',
+        element: <SobreNosotros />,
       },
       {
         path: 'admin-panel',

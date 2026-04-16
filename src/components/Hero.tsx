@@ -1,6 +1,6 @@
-import  headerimg  from "../assets/headerimg.svg";
 import maletin from "../assets/maletin.png";
 import codigo from "../assets/codigo.png";
+import HeroModel from "./HeroModel";
 
 export default function Hero() {
   return (
@@ -88,12 +88,15 @@ export default function Hero() {
 
         {/* ── Visual ── */}
         <div className="relative flex items-center justify-center order-first md:order-last">
-          {/* Illustration — aspect 6:5 matches the SVG viewBox */}
-          <div className="relative w-full max-w-[520px] aspect-6/5 animate-float">
-            <img src={headerimg} alt="" className="w-full h-full object-contain" />
+          {/* 3D Character — canvas fills the container */}
+          <div className="relative w-full max-w-[520px] aspect-square">
+            {/* Three.js Canvas */}
+            <div className="w-full h-full">
+              <HeroModel />
+            </div>
 
-            {/* Floating card 1 — top-left over the image */}
-            <div className="absolute top-[8%] left-0 z-10 flex items-center gap-2.5
+            {/* Floating card 1 — top-left over the model */}
+            <div className="absolute top-[5%] -left-20 z-10 flex items-center gap-2.5
               bg-white/90 backdrop-blur-md border border-divider/60 rounded-2xl px-4 py-3
               shadow-[0_4px_24px_rgba(60,120,80,0.10)] animate-float-card">
               <div className="w-9 h-9 flex items-center justify-center bg-fp-secondary rounded-xl text-lg"><img src={codigo} alt="Codigo" className=" w-7" /></div>
@@ -103,8 +106,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating card 2 — bottom-right over the image */}
-            <div className="absolute bottom-[8%] right-0 z-10 flex items-center gap-2.5
+            {/* Floating card 2 — bottom-right over the model */}
+            <div className="absolute bottom-[8%] right-0 -z-10 flex items-center gap-2.5
               bg-white/90 backdrop-blur-md border border-divider/60 rounded-2xl px-4 py-3
               shadow-[0_4px_24px_rgba(60,120,80,0.10)] animate-float-card-2">
               <div className="w-9 h-9 flex items-center justify-center bg-fp-secondary rounded-xl text-lg"><img src={maletin} alt="Maletin" className=" w-6 " /></div>

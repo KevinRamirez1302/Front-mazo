@@ -4,12 +4,12 @@ import { useGLTF, OrbitControls, Environment, ContactShadows } from '@react-thre
 import { Box3, Vector3, PerspectiveCamera } from 'three'
 import type { Group } from 'three'
 
-// ── Ruta del modelo: coloca tu .glb en src/assets/ y cambia el nombre aquí ──
-const MODEL_PATH = '/src/assets/character.glb'
+// Vite procesa este import y genera la URL correcta en dev y producción
+import characterGlb from '../assets/character.glb'
 
 function CharacterModel() {
   const group = useRef<Group>(null)
-  const { scene } = useGLTF(MODEL_PATH)
+  const { scene } = useGLTF(characterGlb)
   const { camera } = useThree()
 
   // Auto-centrar y auto-escalar el modelo para que quepa siempre completo
@@ -104,4 +104,4 @@ export default function HeroModel() {
 }
 
 // Precargar el modelo
-useGLTF.preload(MODEL_PATH)
+useGLTF.preload(characterGlb)

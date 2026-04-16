@@ -57,7 +57,7 @@ export default function FloatingChatbot() {
     setIsTyping(true)
 
     try {
-      // Llamada real a la API del chatbot enviando el mensaje actual y el historial
+      // preguntarChatbot nunca lanza excepciones — siempre retorna un string con la respuesta o un mensaje amigable de error
       const answerText = await preguntarChatbot(text, history);
       
       setMessages(prev => [...prev, {
@@ -65,18 +65,13 @@ export default function FloatingChatbot() {
         sender: 'bot',
         text: answerText
       }])
-    } catch (error: any) {
-      console.error("Chatbot Error:", error);
-      
-      const apiErrorMessage = error.response?.data?.message || error.response?.data || error.message;
-      const displayMessage = apiErrorMessage 
-        ? `Error de la API: ${apiErrorMessage}`
-        : 'Lo siento, tuve un problema conectándome a mi cerebro digital. Por favor, inténtalo de nuevo más tarde o revisa tu conexión.';
-
+    } catch (error) {
+      // Este catch solo se ejecutaría si hay un error completamente inesperado (ej: fallo de JS)
+      console.error("Error inesperado en el chatbot:", error);
       setMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: displayMessage
+        text: 'Lo siento, ha ocurrido un error inesperado. Por favor, inténtalo más tarde.'
       }])
     } finally {
       setIsTyping(false)

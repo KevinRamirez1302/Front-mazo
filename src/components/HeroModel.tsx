@@ -4,12 +4,13 @@ import { useGLTF, OrbitControls, Environment, ContactShadows } from '@react-thre
 import { Box3, Vector3, PerspectiveCamera } from 'three'
 import type { Group } from 'three'
 
-// Vite procesa este import y genera la URL correcta en dev y producción
-import characterGlb from '../assets/character.glb'
+// El .glb debe estar en /public/character.glb
+// Vite copia public/ tal cual a dist/ sin procesarlo (evita error de binary en rolldown)
+const MODEL_URL = '/character.glb'
 
 function CharacterModel() {
   const group = useRef<Group>(null)
-  const { scene } = useGLTF(characterGlb)
+  const { scene } = useGLTF(MODEL_URL)
   const { camera } = useThree()
 
   // Auto-centrar y auto-escalar el modelo para que quepa siempre completo
@@ -104,4 +105,4 @@ export default function HeroModel() {
 }
 
 // Precargar el modelo
-useGLTF.preload(characterGlb)
+useGLTF.preload(MODEL_URL)
